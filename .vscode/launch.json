@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "ecf_studi2",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "Dart Web",
+            "program": "web",
+            "request": "launch",
+            "type": "dart"
+        }
+    ]
+}
