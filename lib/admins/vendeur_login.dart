@@ -1,6 +1,7 @@
 import 'dart:convert';
-import 'package:ecf_studi2/admins/vendeur_login.dart';
+import 'package:ecf_studi2/admins/Vendeur_upload_item.dart';
 import 'package:ecf_studi2/api_connection/api_connection.dart';
+import 'package:ecf_studi2/users/authentication/login_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ecf_studi2/users/authentication/enregistrement.dart';
 import 'package:flutter/material.dart';
@@ -10,20 +11,20 @@ import 'package:ecf_studi2/users/model/user.dart';
 import 'package:ecf_studi2/users/userPreferences/user_preference.dart';
 import 'package:ecf_studi2/users/fragments/Dashboard_of_fragments.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class VendeurLoginScreen extends StatefulWidget {
+  const VendeurLoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<VendeurLoginScreen> createState() => _VendeurLoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _VendeurLoginScreenState extends State<VendeurLoginScreen> {
 var formKey = GlobalKey<FormState>();
 var emailController = TextEditingController();
 var passwordController = TextEditingController();
 var isObsecure = true.obs;
   
-loginUserNow() async
+loginVendeurNow() async
 {
 try{
 var res = await http.post(
@@ -40,16 +41,10 @@ if(res.statusCode == 200)
         if(resBodyOfLogin['success'] == true)
         {
           Fluttertoast.showToast(msg: "Félécitation vous êtes connecté(e).");
-
-          
-       User userInfo = User.fromJson( resBodyOfLogin["userData"]);
-    
-       //sauvegarder info utlisateur avec Shared Preference
-       await RememberUserPrefs.storeUserInfo(userInfo);
       
       Future.delayed(Duration(milliseconds: 2000), ()
       {
-       Get.to(DashboardOfFragments());
+       Get.to(AdminUploadItemsScreen());
         });
         }
         else
@@ -235,7 +230,7 @@ catch(errorMsg)
                                   {
                                      if(formKey.currentState!.validate())
                                      {
-                                      loginUserNow();
+                                      loginVendeurNow();
                                      }
                                   },
                                   borderRadius: BorderRadius.circular(30),
@@ -257,17 +252,19 @@ catch(errorMsg)
                           ),
                         ),
                       ),
-                      // pas de compte - enregistrez vous
+
+                      SizedBox(height: 16,),
+                      // Je ne suis pas un vendeur
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text(
-                            "Vous n'avez pas de compte ?"
+                            "Je ne suis pas un vendeur"
                           ),
                           TextButton(
                             onPressed: ()
                             {
-                               Get.to(senregistrer());
+                               Get.to(LoginScreen());
                             },
                             child: const Text(
                               "Enregistrez vous",
@@ -279,36 +276,6 @@ catch(errorMsg)
                         ]
                       ),
 
-                        Text(
-                          "OU",
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 16,
-                          ),
-                        ),
-
-                      //Etes vous un administrateur - Bouton
-                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            "Etes vous un vendeur ?"
-                          ),
-                          TextButton(
-                            onPressed: ()
-                            {
-                              Get.to(VendeurLoginScreen());
-                            },
-                            child: const Text(
-                              "clickez ici",
-                              style: TextStyle(
-                              color: Colors.purpleAccent,
-                              fontSize: 16,
-                              ),
-                            ),
-                          )
-                        ]
-                      )
 
 
                      ],

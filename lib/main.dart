@@ -22,7 +22,7 @@ class MainApp extends StatelessWidget {
         builder: (context, dataSnapShot) {
           return LoginScreen();
           
-        }, future: null,
+        }, future: Future.value()
     ));
   }
 }
