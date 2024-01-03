@@ -262,7 +262,7 @@ catch(errorMsg)
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text(
-                            "Vous n'avez pas de compte ?"
+                            "Vous n'avez pas de compte utliisateur ?"
                           ),
                           TextButton(
                             onPressed: ()
@@ -292,7 +292,7 @@ catch(errorMsg)
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text(
-                            "Etes vous un vendeur ?"
+                            "Vous êtes un vendeur ?"
                           ),
                           TextButton(
                             onPressed: ()
@@ -300,7 +300,7 @@ catch(errorMsg)
                               Get.to(VendeurLoginScreen());
                             },
                             child: const Text(
-                              "clickez ici",
+                              "Clickez ici",
                               style: TextStyle(
                               color: Colors.purpleAccent,
                               fontSize: 16,

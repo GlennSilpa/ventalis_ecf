@@ -28,10 +28,10 @@ loginVendeurNow() async
 {
 try{
 var res = await http.post(
-        Uri.parse(API.login),
+        Uri.parse(API.vendeurLogin),
         body: {
-          "email": emailController.text.trim(),
-          "password": passwordController.text.trim(),
+          "vendeur_email": emailController.text.trim(),
+          "vendeur_password": passwordController.text.trim(),
         },
       );
 
@@ -267,7 +267,7 @@ catch(errorMsg)
                                Get.to(LoginScreen());
                             },
                             child: const Text(
-                              "Enregistrez vous",
+                              "Clickez ici",
                               style: TextStyle(
                               color: Colors.purpleAccent,
                               ),
