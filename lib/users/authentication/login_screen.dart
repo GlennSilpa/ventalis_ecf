@@ -47,7 +47,7 @@ if(res.statusCode == 200)
        //sauvegarder info utlisateur avec Shared Preference
        await RememberUserPrefs.storeUserInfo(userInfo);
       
-      Future.delayed(Duration(milliseconds: 2000), ()
+      Future.delayed(const Duration(milliseconds: 2000), ()
       {
        Get.to(DashboardOfFragments());
         });
@@ -94,7 +94,7 @@ catch(errorMsg)
                  Padding(
                    padding: const EdgeInsets.all(16.0),
                    child: Container(
-                     decoration: BoxDecoration(
+                     decoration: const BoxDecoration(
                       color: Colors.white24,
                       borderRadius: BorderRadius.all(
                         Radius.circular(60),
@@ -121,7 +121,7 @@ catch(errorMsg)
                                 controller: emailController,
                                 validator: (val) => val == "" ? "Veuillez entrer votre email" : null,
                                 decoration: InputDecoration(
-                                  prefixIcon: Icon(
+                                  prefixIcon: const Icon(
                                   
                                     Icons.email,
                                     color: Colors.black,
@@ -151,7 +151,7 @@ catch(errorMsg)
                                       color: Colors.white60,     
                                        )
                                   ),
-                                  contentPadding: EdgeInsets.symmetric(
+                                  contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 14,
                                   vertical: 6,
                                   ),
@@ -160,7 +160,7 @@ catch(errorMsg)
                                 ),
                                 ),
                             
-                             SizedBox(height: 18,),
+                             const SizedBox(height: 18,),
                       
                               //password
                               Obx(
@@ -169,7 +169,7 @@ catch(errorMsg)
                                 obscureText: isObsecure.value,
                                 validator: (val) => val == "" ? "Veuillez entrer votre mot de passe" : null,
                                 decoration: InputDecoration(
-                                  prefixIcon: Icon(
+                                  prefixIcon: const Icon(
                                   
                                     Icons.vpn_key_sharp,
                                     color: Colors.black,
@@ -212,7 +212,7 @@ catch(errorMsg)
                                       color: Colors.white60,     
                                        )
                                   ),
-                                  contentPadding: EdgeInsets.symmetric(
+                                  contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 14,
                                   vertical: 6,
                                   ),
@@ -222,7 +222,7 @@ catch(errorMsg)
                                 ),
                               ),
                       
-                              SizedBox(height: 18,),
+                              const SizedBox(height: 18,),
                       
                       
                       
@@ -239,7 +239,7 @@ catch(errorMsg)
                                      }
                                   },
                                   borderRadius: BorderRadius.circular(30),
-                                  child: Padding(
+                                  child: const Padding(
                                     padding: EdgeInsets.all(30),
                                     child: Text(
                                       "Se Connecter",
@@ -262,12 +262,12 @@ catch(errorMsg)
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text(
-                            "Vous n'avez pas de compte utliisateur ?"
+                            "Pas de compte utliisateur ?"
                           ),
                           TextButton(
                             onPressed: ()
                             {
-                               Get.to(senregistrer());
+                               Get.to(const senregistrer());
                             },
                             child: const Text(
                               "Enregistrez vous",
@@ -279,7 +279,7 @@ catch(errorMsg)
                         ]
                       ),
 
-                        Text(
+                        const Text(
                           "OU",
                           style: TextStyle(
                             color: Colors.grey,
@@ -297,7 +297,7 @@ catch(errorMsg)
                           TextButton(
                             onPressed: ()
                             {
-                              Get.to(VendeurLoginScreen());
+                              Get.to(const VendeurLoginScreen());
                             },
                             child: const Text(
                               "Clickez ici",

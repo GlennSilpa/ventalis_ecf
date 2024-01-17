@@ -138,7 +138,7 @@ registerAndSaveUserRecord() async
                  Padding(
                    padding: const EdgeInsets.all(16.0),
                    child: Container(
-                     decoration: BoxDecoration(
+                     decoration: const BoxDecoration(
                       color: Colors.white24,
                       borderRadius: BorderRadius.all(
                         Radius.circular(60),
@@ -166,7 +166,7 @@ registerAndSaveUserRecord() async
                                 controller: usernameController,
                                 validator: (val) => val == "" ? "Veuillez entrer votre nom d'utilisateur" : null,
                                 decoration: InputDecoration(
-                                  prefixIcon: Icon(
+                                  prefixIcon: const Icon(
                                   
                                     Icons.person,
                                     color: Colors.black,
@@ -196,7 +196,7 @@ registerAndSaveUserRecord() async
                                       color: Colors.white60,     
                                        )
                                   ),
-                                  contentPadding: EdgeInsets.symmetric(
+                                  contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 14,
                                   vertical: 6,
                                   ),
@@ -207,14 +207,14 @@ registerAndSaveUserRecord() async
 
 
 
-                                 SizedBox(height: 18,),
+                                 const SizedBox(height: 18,),
 
                                   //Nom de l'entreprise
                               TextFormField(
                                 controller: entrepriseController,
                                 validator: (val) => val == "" ? "Veuillez entrer le nom votre enreprise" : null,
                                 decoration: InputDecoration(
-                                  prefixIcon: Icon(
+                                  prefixIcon: const Icon(
                                   
                                     Icons.email,
                                     color: Colors.black,
@@ -244,7 +244,7 @@ registerAndSaveUserRecord() async
                                       color: Colors.white60,     
                                        )
                                   ),
-                                  contentPadding: EdgeInsets.symmetric(
+                                  contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 14,
                                   vertical: 6,
                                   ),
@@ -254,14 +254,14 @@ registerAndSaveUserRecord() async
                                 ),
 
 
-                             SizedBox(height: 18,),
+                             const SizedBox(height: 18,),
 
                              //Prénom
                              TextFormField(
                                 controller: prenomController,
                                 validator: (val) => val == "" ? "Veuillez entrer votre prénom" : null,
                                 decoration: InputDecoration(
-                                  prefixIcon: Icon(
+                                  prefixIcon: const Icon(
                                   
                                     Icons.person,
                                     color: Colors.black,
@@ -291,7 +291,7 @@ registerAndSaveUserRecord() async
                                       color: Colors.white60,     
                                        )
                                   ),
-                                  contentPadding: EdgeInsets.symmetric(
+                                  contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 14,
                                   vertical: 6,
                                   ),
@@ -301,7 +301,7 @@ registerAndSaveUserRecord() async
                                 ),
 
 
-                                    SizedBox(height: 18,),
+                                    const SizedBox(height: 18,),
 
 
                               //email              
@@ -309,7 +309,7 @@ registerAndSaveUserRecord() async
                                 controller: emailController,
                                 validator: (val) => val == "" ? "Veuillez entrer votre email" : null,
                                 decoration: InputDecoration(
-                                  prefixIcon: Icon(
+                                  prefixIcon: const Icon(
                                   
                                     Icons.email,
                                     color: Colors.black,
@@ -339,7 +339,7 @@ registerAndSaveUserRecord() async
                                       color: Colors.white60,     
                                        )
                                   ),
-                                  contentPadding: EdgeInsets.symmetric(
+                                  contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 14,
                                   vertical: 6,
                                   ),
@@ -348,7 +348,7 @@ registerAndSaveUserRecord() async
                                 ),
                                 ),
                             
-                             SizedBox(height: 18,),
+                             const SizedBox(height: 18,),
                       
                               //password
                               Obx(
@@ -357,7 +357,7 @@ registerAndSaveUserRecord() async
                                 obscureText: isObsecure.value,
                                 validator: (val) => val == "" ? "Veuillez entrer votre mot de passe" : null,
                                 decoration: InputDecoration(
-                                  prefixIcon: Icon(
+                                  prefixIcon: const Icon(
                                   
                                     Icons.vpn_key_sharp,
                                     color: Colors.black,
@@ -400,7 +400,7 @@ registerAndSaveUserRecord() async
                                       color: Colors.white60,     
                                        )
                                   ),
-                                  contentPadding: EdgeInsets.symmetric(
+                                  contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 14,
                                   vertical: 6,
                                   ),
@@ -410,7 +410,7 @@ registerAndSaveUserRecord() async
                                 ),
                               ),
                       
-                              SizedBox(height: 18,),
+                              const SizedBox(height: 18,),
                       
                       
                       
@@ -428,7 +428,7 @@ registerAndSaveUserRecord() async
                                        }
                                   },
                                   borderRadius: BorderRadius.circular(30),
-                                  child: Padding(
+                                  child: const Padding(
                                     padding: EdgeInsets.all(30),
                                     child: Text(
                                       "Enregistrer",
@@ -447,7 +447,7 @@ registerAndSaveUserRecord() async
                         ),
                       ),
 
-                      SizedBox(height: 16,),
+                      const SizedBox(height: 16,),
                       // Vous avez déja un compte ? Connectez vous
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -458,7 +458,7 @@ registerAndSaveUserRecord() async
                           TextButton(
                             onPressed: ()
                             {
-                                Get.to(LoginScreen());
+                                Get.to(const LoginScreen());
                             },
                             child: const Text(
                               "Connectez vous",

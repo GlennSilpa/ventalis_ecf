@@ -215,7 +215,7 @@ Widget uploadItemFormScreen()
     backgroundColor: Colors.black,
     appBar: AppBar(
        flexibleSpace: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
   gradient:LinearGradient(
     colors: [
       Colors.black54,
@@ -225,7 +225,7 @@ Widget uploadItemFormScreen()
 ),
         ),
        automaticallyImplyLeading: false,
-       title: Text(
+       title: const Text(
         "Upload"
        ),
        centerTitle: true,
@@ -286,7 +286,7 @@ Widget uploadItemFormScreen()
       Padding(
                    padding: const EdgeInsets.all(16.0),
                    child: Container(
-                     decoration: BoxDecoration(
+                     decoration: const BoxDecoration(
                       color: Colors.white24,
                       borderRadius: BorderRadius.all(
                         Radius.circular(60),
@@ -313,7 +313,7 @@ Widget uploadItemFormScreen()
                                 controller: libelleController,
                                 validator: (val) => val == "" ? "Veuillez entrer le libelle du produit" : null,
                                 decoration: InputDecoration(
-                                  prefixIcon: Icon(
+                                  prefixIcon: const Icon(
                                   
                                     Icons.title,
                                     color: Colors.black,
@@ -343,7 +343,7 @@ Widget uploadItemFormScreen()
                                       color: Colors.white60,     
                                        )
                                   ),
-                                  contentPadding: EdgeInsets.symmetric(
+                                  contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 14,
                                   vertical: 6,
                                   ),
@@ -352,14 +352,14 @@ Widget uploadItemFormScreen()
                                 ),
                                 ),
                             
-                             SizedBox(height: 18,),
+                             const SizedBox(height: 18,),
                       
                              //description             
                              TextFormField(
                                 controller: descritpionController,
                                 validator: (val) => val == "" ? "Veuillez entrer la description produit" : null,
                                 decoration: InputDecoration(
-                                  prefixIcon: Icon(
+                                  prefixIcon: const Icon(
                                   
                                     Icons.description,
                                     color: Colors.black,
@@ -389,7 +389,7 @@ Widget uploadItemFormScreen()
                                       color: Colors.white60,     
                                        )
                                   ),
-                                  contentPadding: EdgeInsets.symmetric(
+                                  contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 14,
                                   vertical: 6,
                                   ),
@@ -398,14 +398,14 @@ Widget uploadItemFormScreen()
                                 ),
                                 ),
 
-                             SizedBox(height: 18,),
+                             const SizedBox(height: 18,),
                       
                               //prix             
                              TextFormField(
                                 controller: prixController,
                                 validator: (val) => val == "" ? "Veuillez entrer le prix du produit" : null,
                                 decoration: InputDecoration(
-                                  prefixIcon: Icon(
+                                  prefixIcon: const Icon(
                                   
                                     Icons.price_change_outlined,
                                     color: Colors.black,
@@ -435,7 +435,7 @@ Widget uploadItemFormScreen()
                                       color: Colors.white60,     
                                        )
                                   ),
-                                  contentPadding: EdgeInsets.symmetric(
+                                  contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 14,
                                   vertical: 6,
                                   ),
@@ -444,14 +444,14 @@ Widget uploadItemFormScreen()
                                 ),
                                 ),
 
-                             SizedBox(height: 18,),
+                             const SizedBox(height: 18,),
 
                               //Catégorie             
                              TextFormField(
                                 controller: categorieController,
                                 validator: (val) => val == "" ? "Veuillez entrer la catégorie du produit" : null,
                                 decoration: InputDecoration(
-                                  prefixIcon: Icon(
+                                  prefixIcon: const Icon(
                                   
                                     Icons.category,
                                     color: Colors.black,
@@ -481,7 +481,7 @@ Widget uploadItemFormScreen()
                                       color: Colors.white60,     
                                        )
                                   ),
-                                  contentPadding: EdgeInsets.symmetric(
+                                  contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 14,
                                   vertical: 6,
                                   ),
@@ -490,7 +490,7 @@ Widget uploadItemFormScreen()
                                 ),
                                 ),
 
-                             SizedBox(height: 18,),
+                             const SizedBox(height: 18,),
 
 
                       
@@ -508,7 +508,7 @@ Widget uploadItemFormScreen()
                                      }
                                   },
                                   borderRadius: BorderRadius.circular(30),
-                                  child: Padding(
+                                  child: const Padding(
                                     padding: EdgeInsets.all(30),
                                     child: Text(
                                       "Ajouter le produit",
@@ -527,7 +527,7 @@ Widget uploadItemFormScreen()
                         ),
                       ),
 
-                      SizedBox(height: 16,),
+                      const SizedBox(height: 16,),
                       
 
 
@@ -549,7 +549,7 @@ Widget defaultScreen()
   return Scaffold(
       appBar: AppBar(
         flexibleSpace: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
   gradient:LinearGradient(
     colors: [
       Colors.black54,
@@ -559,13 +559,13 @@ Widget defaultScreen()
 ),
         ),
       automaticallyImplyLeading: false,
-      title: Text(
+      title: const Text(
         "Bienvenue cher(e) employé(e)"
         ),
         centerTitle: true,
       ),
       body: Container(
-decoration: BoxDecoration(
+decoration: const BoxDecoration(
   gradient:LinearGradient(
     colors: [
       Colors.black54,
@@ -592,7 +592,7 @@ child: Center(
                                      showDialogBoxForImagePickingAndCapturing();
                                      },
                                   borderRadius: BorderRadius.circular(30),
-                                  child: Padding(
+                                  child: const Padding(
                                     padding: EdgeInsets.all(30),
                                     child: Text(
                                       "Ajouter produit",
