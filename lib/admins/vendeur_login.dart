@@ -80,7 +80,7 @@ catch(errorMsg)
                     width: MediaQuery.of(context).size.width,
                     height: 285,
                     child: Image.asset(
-                      "images/ecologie.webp", 
+                      '', 
                     ),
                   ),
 
