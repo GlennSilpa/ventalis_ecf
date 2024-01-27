@@ -25,7 +25,8 @@ var isObsecure = true.obs;
   
 loginUserNow() async
 {
-try{
+try
+{
 var res = await http.post(
         Uri.parse(API.login),
         body: {

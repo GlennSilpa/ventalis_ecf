@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:ecf_studi2/users/item/produits_details_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:ecf_studi2/api_connection/api_connection.dart';
 import 'package:ecf_studi2/users/model/produits.dart';
@@ -58,7 +60,7 @@ class HomeFragmentScreen extends StatelessWidget {
 
               return GestureDetector(
                 onTap: () {
-                  // Handle item tap if needed
+                  Get.to(ProduitsDetailsScreen(ProduitsInfo: eachProduitsItemRecords));
                 },
                 child: Container(
                   margin: EdgeInsets.fromLTRB(
@@ -145,8 +147,8 @@ class HomeFragmentScreen extends StatelessWidget {
                             bottomRight: Radius.circular(20),
                           ), 
                            child: FadeInImage(
-                            height: 130,
-                            width: 130,
+                            height: 150,
+                            width: 200,
                             fit: BoxFit.cover,
                             placeholder: const AssetImage("images/PM_utilisateurs.jpg"),
                             image: NetworkImage(
