@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:ecf_studi2/api_connection/api_connection.dart';
 import 'package:ecf_studi2/users/controllers/item_details_controller.dart';
 import 'package:ecf_studi2/users/model/produits.dart';
@@ -25,22 +27,36 @@ class _ProduitsDetailsScreenState extends State<ProduitsDetailsScreen> {
     itemDetailsController = Get.put(ItemDetailsController());
   }
 
-  final currentOnlineUser = Get.put(CurrentUser());
+ final currentOnlineUser = Get.find<CurrentUser>(); // Find the instance of CurrentUser
 
-  void ajouterProduitAuPanier() async {
-    try {
-      var res = await http.post(
-        Uri.parse(API.ajouterAuPanier),
-        body: {
-          "user_id": currentOnlineUser.user.username.toString(),
-          "produit_id": widget.ProduitsInfo!.item_id.toString(),
-          "quantite": '',
-        },
-      );
-    } catch (errorMsg) {
-      print("Error :: " + errorMsg.toString());
+void ajouterProduitAuPanier() async {
+  try {
+    // Retrieve user ID from CurrentUser
+    int userId = currentOnlineUser.user.id; // Assuming the user ID is stored in the 'id' field
+
+    var res = await http.post(
+      Uri.parse(API.ajouterAuPanier),
+      body: {
+        "user_id": currentOnlineUser.user.id.toString(), // Use the correct field to access the user ID
+        "produit_id": widget.ProduitsInfo!.item_id.toString(),
+        "quantité": itemDetailsController.quantity.toString(),
+      },
+    );
+
+    if (res.statusCode == 200) {
+      var resBodyOfAjouterPanier = jsonDecode(res.body);
+      if (resBodyOfAjouterPanier['success'] == true) {
+        Fluttertoast.showToast(msg: "Produit ajouté au panier.");
+      } else {
+        Fluttertoast.showToast(msg: "Erreur, veuillez réessayer.");
+      }
+    } else {
+      Fluttertoast.showToast(msg: "Le statut n'est pas 200");
     }
+  } catch (errorMsg) {
+    print("Error :: $errorMsg");
   }
+}
 
   @override
   Widget build(BuildContext context) {

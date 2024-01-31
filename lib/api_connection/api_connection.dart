@@ -24,5 +24,5 @@ static const getAllProduits = "$hostProduits/nouveaux.php";
 
 //panier
 static const ajouterAuPanier = "$hostPanier/ajouter.php";
-
+static const getPanierListe = "$hostPanier/lire.php";
 }
