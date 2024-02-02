@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:ecf_studi2/admins/vendeur_login.dart';
 import 'package:ecf_studi2/api_connection/api_connection.dart';
+import 'package:ecf_studi2/users/fragments/page_acceuil_connecte.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ecf_studi2/users/authentication/enregistrement.dart';
 import 'package:flutter/material.dart';
