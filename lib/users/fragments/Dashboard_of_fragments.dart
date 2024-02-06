@@ -3,94 +3,72 @@ import 'package:ecf_studi2/users/userPreferences/current_user.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:ecf_studi2/users/fragments/home_fragment_screen.dart';
-import 'package:ecf_studi2/users/fragments/favorites_fragment_screen.dart';
 import 'package:ecf_studi2/users/fragments/profile_fragment_screen.dart';
 
-class DashboardOfFragments extends StatelessWidget
-{
-CurrentUser _rememberCurrentUser = Get.put(CurrentUser());
+class DashboardOfFragments extends StatelessWidget {
+  CurrentUser _rememberCurrentUser = Get.put(CurrentUser());
 
-List<Widget> _fragmentScreens = 
-[
-  HomeFragmentScreen(),
-  FavoritesFragmentScreen(),
-  OrderFragmentScreen(),
-  ProfileFragmentScreen(),
-];
+  List<Widget> _fragmentScreens = [
+    OrderFragmentScreen(),
+    ProfileFragmentScreen(),
+  ];
 
-List _navigationButtonsProperties = 
-
-[
- {
-  "active_icon": Icons.home,
-  "non_active_icon": Icons.home_outlined,
-  "label": "Home",
- },
- {
-  "active_icon": Icons.favorite,
-  "non_active_icon": Icons.favorite_border,
-  "label": "Favorites",
- },
- {
-  "active_icon": FontAwesomeIcons.boxOpen,
-  "non_active_icon": FontAwesomeIcons.box,
-  "label": "Orders",
- },
- {
-  "active_icon": Icons.person,
-  "non_active_icon": Icons.person_2_outlined,
-  "label": "Profile",
- },
-];
-
-RxInt _indexNumber = 0.obs;
-
-@override
-Widget build(BuildContext context)
-{
-  return GetBuilder(
-    init: CurrentUser(),
-    initState: (currentstate)
+  List _navigationButtonsProperties = [
     {
-      _rememberCurrentUser.getUserInfo();
+      "active_icon": FontAwesomeIcons.boxOpen,
+      "non_active_icon": FontAwesomeIcons.box,
+      "label": "Commandes",
     },
-    builder: (controller) {
-      return Scaffold(
-        backgroundColor: Colors.black,
-        body: SafeArea(
-          child: Obx(
-            ()=> _fragmentScreens[_indexNumber.value]
-          ),
-          ),
-        bottomNavigationBar: Obx(
-          ()=> BottomNavigationBar(
-            currentIndex: _indexNumber.value,
-            onTap: (value)
-            {
-              _indexNumber.value = value;
-            },
-            showSelectedLabels: true,
-            showUnselectedLabels: true,
-            selectedItemColor: Colors.white,
-            unselectedItemColor: Colors.white24,
-            items: List.generate(4, (index) 
-            {
-              var navBtnProperty = _navigationButtonsProperties[index];
-              return BottomNavigationBarItem(
-                backgroundColor: Colors.black,
-                icon: Icon(navBtnProperty["non_active_icon"]),
-                activeIcon: Icon(navBtnProperty["active_icon"]),
-                label: navBtnProperty["label"],
-              );
-            }
-          
+    {
+      "active_icon": Icons.person,
+      "non_active_icon": Icons.person_2_outlined,
+      "label": "Profile",
+    },
+  ];
+
+  RxInt _indexNumber = 0.obs;
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder(
+      init: CurrentUser(),
+      initState: (currentstate) {
+        _rememberCurrentUser.getUserInfo();
+      },
+      builder: (controller) {
+        return Scaffold(
+          backgroundColor: Colors.black,
+          body: SafeArea(
+            child: Obx(
+              () => _fragmentScreens[_indexNumber.value],
             ),
           ),
-        ),
-        
-      );
-    },
+          bottomNavigationBar: Obx(
+            () => BottomNavigationBar(
+              backgroundColor: Colors.black, // Set background color here
+              currentIndex: _indexNumber.value,
+              onTap: (value) {
+                _indexNumber.value = value;
+              },
+              showSelectedLabels: true,
+              showUnselectedLabels: true,
+              selectedItemColor: Colors.white,
+              unselectedItemColor: Colors.white24,
+              items: List.generate(
+                _navigationButtonsProperties.length,
+                (index) {
+                  var navBtnProperty = _navigationButtonsProperties[index];
+                  return BottomNavigationBarItem(
+                    icon: Icon(navBtnProperty["non_active_icon"]),
+                    activeIcon: Icon(navBtnProperty["active_icon"]),
+                    label: navBtnProperty["label"],
+                  );
+                },
+              ),
+            ),
+          ),
+        );
+      },
     );
-}
+  }
 }

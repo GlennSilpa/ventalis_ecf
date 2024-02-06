@@ -1,3 +1,5 @@
+import 'package:ecf_studi2/users/fragments/Dashboard_of_fragments.dart';
+import 'package:ecf_studi2/users/fragments/page_acceuil.dart';
 import 'package:flutter/widgets.dart';
 import 'package:ecf_studi2/users/authentication/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +22,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: FutureBuilder(
         builder: (context, dataSnapShot) {
-          return const LoginScreen();
+          return LoginScreen();
           
         }, future: Future.value()
     ));

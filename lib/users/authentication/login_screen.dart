@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:ecf_studi2/admins/vendeur_login.dart';
 import 'package:ecf_studi2/api_connection/api_connection.dart';
+import 'package:ecf_studi2/users/fragments/page_acceuil_connecte.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ecf_studi2/users/authentication/enregistrement.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,8 @@ var isObsecure = true.obs;
   
 loginUserNow() async
 {
-try{
+try
+{
 var res = await http.post(
         Uri.parse(API.login),
         body: {
@@ -85,7 +87,7 @@ catch(errorMsg)
                     width: MediaQuery.of(context).size.width,
                     height: 285,
                     child: Image.asset(
-                      "images/ecologie.webp", 
+                      "assets\images\PM_utilisateur.jpg", 
                     ),
                   ),
 
@@ -257,60 +259,8 @@ catch(errorMsg)
                           ),
                         ),
                       ),
-                      // pas de compte - enregistrez vous
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            "Pas de compte utliisateur ?"
-                          ),
-                          TextButton(
-                            onPressed: ()
-                            {
-                               Get.to(const senregistrer());
-                            },
-                            child: const Text(
-                              "Enregistrez vous",
-                              style: TextStyle(
-                              color: Colors.purpleAccent,
-                              ),
-                            ),
-                          )
-                        ]
-                      ),
-
-                        const Text(
-                          "OU",
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 16,
-                          ),
-                        ),
-
-                      //Etes vous un administrateur - Bouton
-                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            "Vous êtes un vendeur ?"
-                          ),
-                          TextButton(
-                            onPressed: ()
-                            {
-                              Get.to(const VendeurLoginScreen());
-                            },
-                            child: const Text(
-                              "Clickez ici",
-                              style: TextStyle(
-                              color: Colors.purpleAccent,
-                              fontSize: 16,
-                              ),
-                            ),
-                          )
-                        ]
-                      )
-
-
+                    
+                     
                      ],
                  
                     ),

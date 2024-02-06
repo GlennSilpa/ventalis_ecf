@@ -5,6 +5,7 @@ class API
   static const hostConnectVendeur = "$hostConnect/vendeur";
   static const hostUploadItem = "$hostConnect/items";
   static const hostProduits = "$hostConnect/produits";
+  static const hostPanier = "$hostConnect/panier";
   
   //signUp-Login user
   static const validateEmail = "$hostConnectUser/validate_email.php";
@@ -21,4 +22,7 @@ static const uploadNewItem = "$hostUploadItem/upload.php";
 //produits
 static const getAllProduits = "$hostProduits/nouveaux.php";
 
+//panier
+static const ajouterAuPanier = "$hostPanier/ajouter.php";
+static const getPanierListe = "$hostPanier/lire.php";
 }
