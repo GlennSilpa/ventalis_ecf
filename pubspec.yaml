@@ -24,5 +24,10 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/ecologie.webp
+    - assets/images/profile_pic.jpg
     
+
+
   

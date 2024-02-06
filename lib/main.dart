@@ -21,7 +21,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: FutureBuilder(
         builder: (context, dataSnapShot) {
-          return const LoginScreen();
+          return const HomePage();
           
         }, future: Future.value()
     ));

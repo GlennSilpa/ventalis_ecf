@@ -1,9 +1,8 @@
 import 'dart:convert';
-
+import 'package:ecf_studi2/users/userPreferences/current_user.dart';
 import 'package:ecf_studi2/api_connection/api_connection.dart';
 import 'package:ecf_studi2/users/controllers/item_details_controller.dart';
 import 'package:ecf_studi2/users/model/produits.dart';
-import 'package:ecf_studi2/users/userPreferences/current_user.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';

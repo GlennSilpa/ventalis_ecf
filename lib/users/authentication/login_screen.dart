@@ -51,7 +51,7 @@ if(res.statusCode == 200)
       
       Future.delayed(const Duration(milliseconds: 2000), ()
       {
-       Get.to(DashboardOfFragments());
+       Get.to(HomePageConnecte());
         });
         }
         else
@@ -294,7 +294,7 @@ catch(errorMsg)
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text(
-                            "Vous êtes un vendeur ?"
+                            "Vous êtes un(e) employé(e) ?"
                           ),
                           TextButton(
                             onPressed: ()

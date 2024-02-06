@@ -259,7 +259,7 @@ catch(errorMsg)
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text(
-                            "Je ne suis pas un vendeur"
+                            "Je ne suis pas un(e) employé(e)"
                           ),
                           TextButton(
                             onPressed: ()

@@ -3,7 +3,7 @@ import 'package:ecf_studi2/users/fragments/Mon_compte.dart';
 import 'package:ecf_studi2/users/fragments/home_fragment_screen.dart';
 import 'package:ecf_studi2/users/fragments/page_contact.dart';
 import 'package:ecf_studi2/users/fragments/presentation_ventalis.dart';
-import 'package:ecf_studi2/users/model/produits.dart';
+import 'package:ecf_studi2/users/fragments/profile_fragment_screen.dart';
 import 'package:ecf_studi2/users/panier/ecran_panier_liste.dart';
 import 'package:flutter/material.dart';
 
@@ -18,114 +18,126 @@ class _HomePageState extends State<HomePageConnecte> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-      centerTitle: true,
-      title: Text("Ventalis"),
-      backgroundColor: Colors.black,
-    ),
-    drawer: Drawer(
-      child: ListView(children: [ 
-        DrawerHeader (decoration:BoxDecoration(
-          color: Colors.black,
-          image: DecorationImage(
-            fit: BoxFit.fill, 
-            image: AssetImage('assets/images/NFL_wallpaper.jpg'),
-            )
-        ), child: Column(
-          children: [
-            
-              
-          ],
-        ),),
-        ListTile(leading: Icon(Icons.person, size: 50,color: Colors.black,), title: Text("Mon Compte",
-        style: TextStyle(color:Colors.black,fontSize: 20),),
-             contentPadding: EdgeInsets.all(20),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30) ),
-        onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) =>  MonCompte()
-          ));
-       }
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text("Ventalis"),
+          backgroundColor: Colors.black,
         ),
-
-        ListTile(leading: Icon(Icons.shopping_basket, size : 50,color: Colors.black,), title: Text("Mon Panier",
-        style: TextStyle(color:Colors.black,fontSize: 20),
+        drawer: Drawer(
+          child: ListView(
+            children: [
+              const DrawerHeader(
+                decoration: BoxDecoration(
+                    color: Colors.black,
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: AssetImage('assets/images/NFL_wallpaper.jpg'),
+                    )),
+                child: Column(
+                  children: [],
+                ),
+              ),
+              ListTile(
+                  leading: const Icon(
+                    Icons.person,
+                    size: 50,
+                    color: Colors.black,
+                  ),
+                  title: const Text(
+                    "Mon Compte",
+                    style: TextStyle(color: Colors.black, fontSize: 20),
+                  ),
+                  contentPadding: const EdgeInsets.all(20),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)),
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => ProfileFragmentScreen()));
+                  }),
+              ListTile(
+                leading: const Icon(
+                  Icons.shopping_basket,
+                  size: 50,
+                  color: Colors.black,
+                ),
+                title: const Text(
+                  "Mon Panier",
+                  style: TextStyle(color: Colors.black, fontSize: 20),
+                ),
+                contentPadding: const EdgeInsets.all(20),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => PanierListe()));
+                },
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.shopping_bag,
+                  size: 50,
+                  color: Colors.black,
+                ),
+                title: const Text(
+                  "Catalogue",
+                  style: TextStyle(color: Colors.black, fontSize: 20),
+                ),
+                contentPadding: const EdgeInsets.all(20),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => HomeFragmentScreen()));
+                },
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.mail_outlined,
+                  size: 50,
+                  color: Colors.black,
+                ),
+                title: const Text(
+                  "Contact",
+                  style: TextStyle(color: Colors.black, fontSize: 20),
+                ),
+                contentPadding: const EdgeInsets.all(20),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const PageContact()));
+                },
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.factory_sharp,
+                  size: 50,
+                  color: Colors.black,
+                ),
+                title: const Text(
+                  "Présentation de l'entreprise",
+                  style: TextStyle(color: Colors.black, fontSize: 20),
+                ),
+                contentPadding: const EdgeInsets.all(20),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const Presentation()));
+                },
+              ),
+            ],
+          ),
         ),
-        contentPadding: EdgeInsets.all(20),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30) ),
-        onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) =>  LoginScreen()
-          ));
-       },),
-
-
-        ListTile(leading: Icon(Icons.shopping_bag, size: 50,color: Colors.black,), title: Text("Catalogue",
-        style: TextStyle(color:Colors.black,fontSize: 20),
-        ),
-        contentPadding: EdgeInsets.all(20),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30) ),
-       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) =>  HomeFragmentScreen()
-          ));
-       },),
-
-
-        ListTile(leading: Icon(Icons.mail_outlined,size: 50,color: Colors.black,), title: Text("Contact",
-        style: TextStyle(color:Colors.black,fontSize: 20),
-        ),
-        contentPadding: EdgeInsets.all(20),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30) ),
-        onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) =>  PageContact()
-          ));
-       },),
-
-       ListTile(leading: Icon(Icons.factory_sharp, size: 50,color: Colors.black,), title: Text("Présentation de l'entreprise",
-        style: TextStyle(color:Colors.black,fontSize: 20),
-        ),
-        contentPadding: EdgeInsets.all(20),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30) ),
-        onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) =>  Presentation()
-          ));
-       },),
-
-
-
-      ],),
-    ),
-    body: Container(alignment: Alignment.center,
-    padding: const EdgeInsets.all(32),
-    decoration: const BoxDecoration(
-      image: DecorationImage(image: AssetImage(
-        'assets/images/NFL_field.jpg'),
-        fit: BoxFit.cover,
-        ),
-    ),
-    
-    )
-      
-          
-         
-      
-    
-
-
-    
-    
-      
-
-
-    
-    );
+        body: Container(
+          alignment: Alignment.center,
+          padding: const EdgeInsets.all(32),
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/ecologie.webp'),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ));
   }
 }
