@@ -1,5 +1,4 @@
 import 'package:ecf_studi2/users/authentication/login_screen.dart';
-import 'package:ecf_studi2/users/fragments/page_acceuil.dart';
 import 'package:ecf_studi2/users/userPreferences/current_user.dart';
 import 'package:ecf_studi2/users/userPreferences/user_preference.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +30,7 @@ class ProfileFragmentScreen extends StatelessWidget
               Get.back();
             },
             child: const Text(
-              "No",
+              "Non",
             style: TextStyle(
               color: Colors.black,
             ),
