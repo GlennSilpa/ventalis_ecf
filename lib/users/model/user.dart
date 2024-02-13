@@ -15,19 +15,19 @@ class User {
     this.entreprise,
   );
 
- factory User.fromJson(Map<String, dynamic> json) {
-  return User(
-    int.tryParse(json["id"]?.toString() ?? '0') ?? 0,
-    json["username"] ?? '',
-    json["email"] ?? '',
-    json["password"] ?? '',
-    json["prenom"] ?? '',
-    json["entreprise"] ?? '',
-  );
-}
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      int.tryParse(json["Id"]?.toString() ?? '0') ?? 0,
+      json["username"] ?? '',
+      json["email"] ?? '',
+      json["password"] ?? '',
+      json["prenom"] ?? '',
+      json["entreprise"] ?? '',
+    );
+  }
 
   Map<String, dynamic> toJson() => {
-        'id': id.toString(),
+        'Id': id.toString(),
         'username': username,
         'email': email,
         'password': password,

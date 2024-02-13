@@ -1,10 +1,70 @@
+import 'package:ecf_studi2/users/fragments/page_acceuil.dart';
 import 'package:ecf_studi2/users/userPreferences/current_user.dart';
+import 'package:ecf_studi2/users/userPreferences/user_preference.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProfileFragmentScreen extends StatelessWidget 
 {
   final CurrentUser _currentUser = Get.put(CurrentUser());
+
+  signOutUser() async
+  {
+   var resultResponse = await Get.dialog(
+       AlertDialog(
+         backgroundColor: Colors.grey,
+         title: const Text(
+          "Déconnexion",
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            
+            ),
+          ),
+         content: const Text("êtes vous sure?",
+         ),
+         actions: [
+          TextButton(
+            onPressed: ()
+            {
+              Get.back();
+            },
+            child: const Text(
+              "Non",
+            style: TextStyle(
+              color: Colors.black,
+            ),
+            )
+          ),
+           TextButton(
+            onPressed: ()
+            {
+              Get.back(result: "déconnecté");
+            },
+            child: const Text(
+              "Oui",
+            style: TextStyle(
+              color: Colors.black,
+            ),
+            )
+          ),
+         ],
+       ),
+    );
+
+    if(resultResponse == "déconnecté")
+    {
+      RememberUserPrefs.removeUserInfo()
+      .then((value) 
+      {
+
+          Get.off(HomePage());
+
+      });
+
+      //delete-remove the user data from localstorage
+    }
+  }
   
   Widget userInfoItemProfile(IconData iconData, String userData) {
     return Container(
@@ -71,7 +131,7 @@ class ProfileFragmentScreen extends StatelessWidget
             child: InkWell(
               onTap: ()
               {
-
+                  signOutUser();
               },
               borderRadius: BorderRadius.circular(32),
               child: const Padding(

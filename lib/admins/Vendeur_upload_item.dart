@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'dart:html' as html;
 import 'dart:io';
 import 'dart:typed_data';
+
 import 'package:ecf_studi2/api_connection/api_connection.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -149,40 +149,65 @@ class _AdminUploadItemsScreenState extends State<AdminUploadItemsScreen> {
         filename: imageName,
       );
     }
+    try {
+      requestImgurApi.files.add(imageFile);
+      var responseFromImgurApi = await requestImgurApi.send();
 
-    requestImgurApi.files.add(imageFile);
-    var responseFromImgurApi = await requestImgurApi.send();
+      var responseDataFromImgurApi =
+          await responseFromImgurApi.stream.toBytes();
+      var resultFromImgurApi = String.fromCharCodes(responseDataFromImgurApi);
 
-    var responseDataFromImgurApi = await responseFromImgurApi.stream.toBytes();
-    var resultFromImgurApi = String.fromCharCodes(responseDataFromImgurApi);
+      Map<String, dynamic> jsonRes = json.decode(resultFromImgurApi);
+      imageLink = (jsonRes["data"]["link"]).toString();
+      String deleteHash = (jsonRes["data"]["deletehash"]).toString();
 
-    Map<String, dynamic> jsonRes = json.decode(resultFromImgurApi);
-    imageLink = (jsonRes["data"]["link"]).toString();
-    String deleteHash = (jsonRes["data"]["deletehash"]).toString();
-
-    saveItemInfoToDatabase();
+      saveItemInfoToDatabase();
+    } catch (e) {
+      debugPrint("Error:: $e");
+    }
   }
 
   saveItemInfoToDatabase() async {
     List<String> categorieList = categorieController.text.split(',');
 
     try {
-      var response = await http.post(
+      var request = http.MultipartRequest(
+        "POST",
         Uri.parse(API.uploadNewItem),
-        body: {
-          'item_id': '1',
-          'libelle': libelleController.text.trim().toString(),
-          'description': descritpionController.text.trim().toString(),
-          'prix': prixController.text.trim().toString(),
-          'categorie': categorieList.toString(),
-          'image': imageLink.toString(),
-        },
       );
 
-      if (response.statusCode == 200) {
-        var resBodyOfUploadItem = jsonDecode(response.body);
+      request.fields['item_id'] = '1';
+      request.fields['libelle'] = libelleController.text.trim().toString();
+      request.fields['description'] =
+          descritpionController.text.trim().toString();
+      request.fields['prix'] = prixController.text.trim().toString();
+      request.fields['categorie'] = categorieList.toString();
 
-        if (resBodyOfUploadItem['success'] == true) {
+      var imageFile;
+      String imageName = DateTime.now().millisecondsSinceEpoch.toString();
+      if (GetPlatform.isWeb) {
+        imageFile = await http.MultipartFile.fromBytes(
+          'image',
+          _webImageFile!.toList(),
+          filename: "$imageName.png",
+        );
+      } else {
+        imageFile = await http.MultipartFile.fromPath(
+          'image',
+          pickedimageXFile!.path,
+          filename: "$imageName.png",
+        );
+      }
+
+      request.files.add(imageFile);
+
+      var response = await request.send();
+
+      if (response.statusCode == 200) {
+        var resBodyOfUploadItem = await response.stream.bytesToString();
+        var resJsonOfUploadItem = jsonDecode(resBodyOfUploadItem);
+
+        if (resJsonOfUploadItem['success'] == true) {
           Fluttertoast.showToast(msg: "nouveau produit créer");
 
           setState(() {
@@ -238,19 +263,20 @@ class _AdminUploadItemsScreenState extends State<AdminUploadItemsScreen> {
             icon: const Icon(
               Icons.clear,
             )),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Fluttertoast.showToast(msg: "En cours de création...");
+        // actions: [
+        //   TextButton(
+        //     onPressed: () {
+        //       Fluttertoast.showToast(msg: "En cours de création...");
 
-              uploadItemImage();
-            },
-            child: const Text("Terminé",
-                style: TextStyle(
-                  color: Colors.green,
-                )),
-          ),
-        ],
+        //       // uploadItemImage();
+
+        //     },
+        //     child: const Text("Terminé",
+        //         style: TextStyle(
+        //           color: Colors.green,
+        //         )),
+        //   ),
+        // ],
       ),
       body: ListView(
         children: [
@@ -482,7 +508,8 @@ class _AdminUploadItemsScreenState extends State<AdminUploadItemsScreen> {
                                 if (formKey.currentState!.validate()) {
                                   Fluttertoast.showToast(
                                       msg: "En cours de création...");
-                                  uploadItemImage();
+                                  // uploadItemImage();
+                                  saveItemInfoToDatabase();
                                 }
                               },
                               borderRadius: BorderRadius.circular(30),
@@ -583,3 +610,4 @@ class _AdminUploadItemsScreenState extends State<AdminUploadItemsScreen> {
         : uploadItemFormScreen();
   }
 }
+
