@@ -1,6 +1,6 @@
 class API
 {
-  static const hostConnect = "http://192.168.1.11/api_ventalis";
+  static const hostConnect = "https://ventalis1.000webhostapp.com/api_ventalis";
   static const hostConnectUser = "$hostConnect/user";
   static const hostConnectVendeur = "$hostConnect/vendeur";
   static const hostUploadItem = "$hostConnect/items";
