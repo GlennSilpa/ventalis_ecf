@@ -19,6 +19,8 @@ class _PanierListeState extends State<PanierListe> {
   late final CurrentUser currentOnlineUser;
   late final PanierListeController panierListeController;
 
+  bool isLoading = false;
+
   @override
   void initState() {
     super.initState();
@@ -83,132 +85,206 @@ class _PanierListeState extends State<PanierListe> {
         backgroundColor: Colors.black,
         body: Obx(
           () => panierListeController.listePanier.length > 0
-              ? ListView.builder(
-                  itemCount: panierListeController.listePanier.length,
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) {
-                    Panier panierModel =
-                        panierListeController.listePanier[index];
+              ? Column(
+                  children: [
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: panierListeController.listePanier.length,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) {
+                          Panier panierModel =
+                              panierListeController.listePanier[index];
 
-                    Produits produitsModel = Produits(
-                      item_id: panierModel.produit_id,
-                      image: panierModel.image,
-                      prix: panierModel.prix,
-                      categorie: panierModel.categorie,
-                      description: panierModel.description,
-                      libelle: panierModel.libelle,
-                    );
+                          Produits produitsModel = Produits(
+                            item_id: panierModel.produit_id,
+                            image: panierModel.image,
+                            prix: panierModel.prix,
+                            categorie: panierModel.categorie,
+                            description: panierModel.description,
+                            libelle: panierModel.libelle,
+                          );
 
-                    return SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Row(
-                        children: [
-                          GetBuilder(
-                            init: PanierListeController(),
-                            builder: (c) {
-                              return IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  panierListeController.selectedItem
-                                          .contains(panierModel.produit_id)
-                                      ? Icons.check_box
-                                      : Icons.check_box_outline_blank,
-                                  color: panierListeController.isSelectedAll
-                                      ? Colors.white
-                                      : Colors.grey,
+                          return SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              children: [
+                                GetBuilder(
+                                  init: PanierListeController(),
+                                  builder: (c) {
+                                    return IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        panierListeController.selectedItem
+                                                .contains(
+                                                    panierModel.produit_id)
+                                            ? Icons.check_box
+                                            : Icons.check_box_outline_blank,
+                                        color:
+                                            panierListeController.isSelectedAll
+                                                ? Colors.white
+                                                : Colors.grey,
+                                      ),
+                                    );
+                                  },
                                 ),
-                              );
-                            },
-                          ),
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () {},
-                              child: Container(
-                                margin: EdgeInsets.fromLTRB(
-                                  0,
-                                  index == 0 ? 16 : 8,
-                                  16,
-                                  index ==
-                                          panierListeController
-                                                  .listePanier.length -
-                                              1
-                                      ? 16
-                                      : 8,
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      offset: Offset(0, 0),
-                                      blurRadius: 6,
-                                      color: Colors.white,
-                                    ),
-                                  ],
-                                ),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: EdgeInsets.all(10),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                                produitsModel.libelle
-                                                    .toString(),
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: const TextStyle(
-                                                  fontSize: 18,
-                                                  color: Colors.grey,
-                                                  fontWeight: FontWeight.bold,
-                                                )),
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: () {},
+                                    child: Container(
+                                      margin: EdgeInsets.fromLTRB(
+                                        0,
+                                        index == 0 ? 16 : 8,
+                                        16,
+                                        index ==
+                                                panierListeController
+                                                        .listePanier.length -
+                                                    1
+                                            ? 16
+                                            : 8,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        boxShadow: const [
+                                          BoxShadow(
+                                            offset: Offset(0, 0),
+                                            blurRadius: 6,
+                                            color: Colors.white,
+                                          ),
+                                        ],
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: Padding(
+                                              padding: EdgeInsets.all(10),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                      produitsModel.libelle
+                                                          .toString(),
+                                                      maxLines: 2,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: const TextStyle(
+                                                        fontSize: 18,
+                                                        color: Colors.grey,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      )),
 
-                                            const SizedBox(
-                                              height: 20,
-                                            ),
-
-                                            //prix
-                                            Row(
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 12,
-                                                          right: 12.0),
-                                                  child: Text(
-                                                    "\€" +
-                                                        produitsModel.prix
-                                                            .toString(),
-                                                    style: const TextStyle(
-                                                      fontSize: 20,
-                                                      color:
-                                                          Colors.purpleAccent,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
+                                                  const SizedBox(
+                                                    height: 20,
                                                   ),
-                                                ),
-                                              ],
+
+                                                  //prix
+                                                  Row(
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(
+                                                                left: 12,
+                                                                right: 12.0),
+                                                        child: Text(
+                                                          "\€" +
+                                                              produitsModel.prix
+                                                                  .toString(),
+                                                          style:
+                                                              const TextStyle(
+                                                            fontSize: 20,
+                                                            color: Colors
+                                                                .purpleAccent,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                  ],
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
-                          ),
-                        ],
+                          );
+                        },
                       ),
-                    );
-                  },
+                    ),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.purpleAccent,
+                            minimumSize: Size(
+                                MediaQuery.of(context).size.width - 16, 50)),
+                        onPressed: isLoading
+                            ? () {}
+                            : () async {
+                                setState(() {
+                                  isLoading = true;
+                                });
+                                await orderNow();
+
+                                setState(() {
+                                  isLoading = false;
+                                });
+                              },
+                        child: isLoading
+                            ? const CircularProgressIndicator()
+                            : const Text(
+                                "Order Now",
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.white),
+                              )),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                  ],
                 )
               : const Center(
                   child: Text("Le panier est vide"),
                 ),
         ));
+  }
+
+  orderNow() {
+    List<int> productIds = panierListeController.listePanier
+        .map((e) => e.produit_id ?? 0)
+        .toList();
+    List<int> productQuantities =
+        panierListeController.listePanier.map((e) => e.quantite ?? 0).toList();
+
+    try {
+      http.post(
+        Uri.parse(API.orderNow),
+        body: {
+          "user_id": currentOnlineUser.user.id.toString(),
+          "product_id": productIds.toString(),
+          "product_quantity": productQuantities.toString(),
+        },
+      ).then((res) async {
+        if (res.statusCode == 200) {
+          var responseBodyOfOrderNow = jsonDecode(res.body);
+          if (responseBodyOfOrderNow['success'] == true) {
+            Fluttertoast.showToast(msg: "Order Successfull");
+            panierListeController.clearAllSelectedItem();
+            await getCurrentUserPanierListe();
+            Navigator.of(context).pop();
+          } else {
+            Fluttertoast.showToast(msg: "Error while creating order");
+          }
+        } else {
+          Fluttertoast.showToast(msg: "Error while creating order");
+        }
+      });
+    } catch (errorMsg) {
+      Fluttertoast.showToast(msg: "Error ::" + errorMsg.toString());
+    }
   }
 }
