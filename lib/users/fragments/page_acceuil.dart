@@ -83,8 +83,8 @@ class _HomePageState extends State<HomePage> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30)),
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const PageContact()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => PageContact()));
                 },
               ),
               ListTile(
