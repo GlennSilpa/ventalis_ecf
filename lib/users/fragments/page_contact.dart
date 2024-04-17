@@ -19,7 +19,7 @@ class PageContact extends StatefulWidget {
 }
 
 class _PageContactState extends State<PageContact> {
-  String currentUserId = "10";
+  String currentUserId = "";
 
   List<MessageModel> messages = [];
 
@@ -27,14 +27,14 @@ class _PageContactState extends State<PageContact> {
 
   bool isSending = false;
 
-  bool isLoading = false;
+  bool isLoading = true;
 
   late Timer _timer;
 
   @override
   void initState() {
     super.initState();
-    // currentUserId = Get.put(CurrentUser()).user.id;
+    currentUserId = Get.put(CurrentUser()).user.id.toString();
     _timer = Timer.periodic(const Duration(seconds: 5), (timer) async {
       getMessagesBySenderId();
     });
