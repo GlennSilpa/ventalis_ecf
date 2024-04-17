@@ -56,9 +56,10 @@ class DashboardOfFragments extends StatelessWidget {
               showUnselectedLabels: true,
               selectedItemColor: Colors.white,
               unselectedItemColor: Colors.white24,
-              items: List.generate(
+              items: List.generate( 
                 _navigationButtonsProperties.length,
-                (index) {
+                (index) 
+                {
                   var navBtnProperty = _navigationButtonsProperties[index];
                   return BottomNavigationBarItem(
                     icon: Icon(navBtnProperty["non_active_icon"]),
@@ -67,6 +68,9 @@ class DashboardOfFragments extends StatelessWidget {
                   );
                 },
               ),
+
+
+
             ),
           ),
         );
