@@ -1,7 +1,15 @@
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:ecf_studi2/api_connection/api_connection.dart';
 import 'package:ecf_studi2/users/model/message.dart';
+import 'package:ecf_studi2/users/userPreferences/current_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class PageContact extends StatefulWidget {
   PageContact({super.key});
@@ -11,72 +19,32 @@ class PageContact extends StatefulWidget {
 }
 
 class _PageContactState extends State<PageContact> {
-  int currentUserId = 2;
+  String currentUserId = "10";
 
-  List<MessageModel> messages = [
-    MessageModel(
-        message: "Message 1",
-        chatId: 0,
-        createdAt: DateTime.now(),
-        id: 0,
-        receiverId: 1,
-        senderId: 2),
-    MessageModel(
-        message: "Message 2",
-        chatId: 0,
-        createdAt: DateTime.now(),
-        id: 1,
-        receiverId: 1,
-        senderId: 2),
-    MessageModel(
-        message: "Message 3",
-        chatId: 0,
-        createdAt: DateTime.now(),
-        id: 2,
-        receiverId: 1,
-        senderId: 2),
-    MessageModel(
-        message: "Message 4",
-        chatId: 0,
-        createdAt: DateTime.now(),
-        id: 3,
-        receiverId: 1,
-        senderId: 2),
-    MessageModel(
-        message: "Message 5",
-        chatId: 0,
-        createdAt: DateTime.now(),
-        id: 4,
-        receiverId: 1,
-        senderId: 2),
-    MessageModel(
-        message: "Message 6",
-        chatId: 0,
-        createdAt: DateTime.now(),
-        id: 5,
-        receiverId: 1,
-        senderId: 2),
-    MessageModel(
-        message: "Message 7",
-        chatId: 0,
-        createdAt: DateTime.now(),
-        id: 6,
-        receiverId: 1,
-        senderId: 2),
-    MessageModel(
-        message: "Message 8",
-        chatId: 0,
-        createdAt: DateTime.now(),
-        id: 7,
-        receiverId: 1,
-        senderId: 2),
-  ].reversed.toList();
+  List<MessageModel> messages = [];
 
   final TextEditingController _controller = TextEditingController();
 
   bool isSending = false;
 
   bool isLoading = false;
+
+  late Timer _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    // currentUserId = Get.put(CurrentUser()).user.id;
+    _timer = Timer.periodic(const Duration(seconds: 5), (timer) async {
+      getMessagesBySenderId();
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -159,7 +127,7 @@ class _PageContactState extends State<PageContact> {
                           decoration: InputDecoration(
                             hintText: "Type a message",
                             filled: true,
-                            fillColor: Colors.grey.shade500,
+                            fillColor: Colors.grey.shade100,
                           ),
                         ),
                       ),
@@ -169,7 +137,11 @@ class _PageContactState extends State<PageContact> {
                               setState(() {
                                 isSending = true;
                               });
-                              await Future.delayed(Duration(seconds: 2));
+                              String chatId = messages.isEmpty
+                                  ? "0"
+                                  : messages[0].chatId.toString();
+                              await sendMessage(_controller.text.trim(), "1",
+                                  chatId, DateTime.now());
                               //send Message
                               _controller.clear();
 
@@ -192,5 +164,74 @@ class _PageContactState extends State<PageContact> {
   //convert DateTime.now() to DD/MM/YYYY HH:MM:SS
   String convertDateTime(DateTime dateTime) {
     return "${dateTime.day}/${dateTime.month}/${dateTime.year} ${dateTime.hour}:${dateTime.minute}";
+  }
+
+  getMessagesBySenderId() async {
+    //get messages by senderId
+    try {
+      final response = await http.post(Uri.parse(API.getMessages), body: {
+        "sender_id": currentUserId.toString(),
+      });
+      if (response.statusCode == 200) {
+        final List<MessageModel> messagesList = messageModelFromJson(
+            jsonEncode(jsonDecode(response.body)['messages']));
+        setState(() {
+          messages = messagesList.reversed.toList();
+          isLoading = false;
+        });
+      } else {
+        setState(() {
+          isLoading = false;
+        });
+        Fluttertoast.showToast(msg: "Error: ${response.statusCode}");
+      }
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      Fluttertoast.showToast(msg: e.toString());
+      print(e);
+    }
+  }
+
+  sendMessage(String message, String receiverId, String chatId,
+      DateTime createdAt) async {
+    //get messages by senderId
+    try {
+      final response = await http.post(Uri.parse(API.sendMessage), body: {
+        "sender_id": currentUserId.toString(),
+        "receiver_id": receiverId,
+        "chat_id": chatId,
+        "message": message,
+        "created_at": createdAt.toIso8601String(),
+      });
+      if (response.statusCode == 200) {
+        setState(() {
+          messages = messages.reversed.toList();
+          messages.add(
+            MessageModel(
+              senderId: currentUserId.toString(),
+              receiverId: receiverId,
+              chatId: chatId,
+              message: message,
+              createdAt: createdAt,
+            ),
+          );
+          messages = messages.reversed.toList();
+          isSending = false;
+        });
+      } else {
+        setState(() {
+          isLoading = false;
+        });
+        Fluttertoast.showToast(msg: "Error: ${response.statusCode}");
+      }
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      Fluttertoast.showToast(msg: e.toString());
+      print(e);
+    }
   }
 }

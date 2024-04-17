@@ -11,11 +11,11 @@ String messageModelToJson(List<MessageModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class MessageModel {
-  int? id;
+  String? id;
   String? message;
-  int? chatId;
-  int? senderId;
-  int? receiverId;
+  String? chatId;
+  String? senderId;
+  String? receiverId;
   DateTime? createdAt;
 
   MessageModel({
