@@ -1,4 +1,5 @@
 import 'package:ecf_studi2/users/fragments/order_fragment_screen.dart';
+import 'package:ecf_studi2/users/fragments/page_contact.dart';
 import 'package:ecf_studi2/users/userPreferences/current_user.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -6,14 +7,15 @@ import 'package:get/get.dart';
 import 'package:ecf_studi2/users/fragments/profile_fragment_screen.dart';
 
 class DashboardOfFragments extends StatelessWidget {
-  CurrentUser _rememberCurrentUser = Get.put(CurrentUser());
+  final CurrentUser _rememberCurrentUser = Get.put(CurrentUser());
 
-  List<Widget> _fragmentScreens = [
+  final List<Widget> _fragmentScreens = [
     OrderFragmentScreen(),
     ProfileFragmentScreen(),
+    PageContact(),
   ];
 
-  List _navigationButtonsProperties = [
+  final List _navigationButtonsProperties = [
     {
       "active_icon": FontAwesomeIcons.boxOpen,
       "non_active_icon": FontAwesomeIcons.box,
@@ -23,6 +25,11 @@ class DashboardOfFragments extends StatelessWidget {
       "active_icon": Icons.person,
       "non_active_icon": Icons.person_2_outlined,
       "label": "Profile",
+    },
+    {
+      "active_icon": Icons.chat,
+      "non_active_icon": Icons.chat_bubble_outline,
+      "label": "Chat",
     },
   ];
 
@@ -56,10 +63,9 @@ class DashboardOfFragments extends StatelessWidget {
               showUnselectedLabels: true,
               selectedItemColor: Colors.white,
               unselectedItemColor: Colors.white24,
-              items: List.generate( 
+              items: List.generate(
                 _navigationButtonsProperties.length,
-                (index) 
-                {
+                (index) {
                   var navBtnProperty = _navigationButtonsProperties[index];
                   return BottomNavigationBarItem(
                     icon: Icon(navBtnProperty["non_active_icon"]),
@@ -68,9 +74,6 @@ class DashboardOfFragments extends StatelessWidget {
                   );
                 },
               ),
-
-
-
             ),
           ),
         );
