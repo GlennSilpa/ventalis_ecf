@@ -11,8 +11,8 @@ class DashboardOfFragments extends StatelessWidget {
 
   final List<Widget> _fragmentScreens = [
     OrderFragmentScreen(),
-    ProfileFragmentScreen(),
     PageContact(),
+    ProfileFragmentScreen(),
   ];
 
   final List _navigationButtonsProperties = [
@@ -22,14 +22,14 @@ class DashboardOfFragments extends StatelessWidget {
       "label": "Commandes",
     },
     {
-      "active_icon": Icons.person,
-      "non_active_icon": Icons.person_2_outlined,
-      "label": "Profile",
-    },
-    {
       "active_icon": Icons.chat,
       "non_active_icon": Icons.chat_bubble_outline,
       "label": "Chat",
+    },
+    {
+      "active_icon": Icons.person,
+      "non_active_icon": Icons.person_2_outlined,
+      "label": "Profile",
     },
   ];
 
