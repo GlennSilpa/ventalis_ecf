@@ -7,6 +7,7 @@ class API {
   static const hostPanier = "$hostConnect/panier";
   static const hostOrder = "$hostConnect/orders";
   static const hostMessage = "$hostConnect/messages";
+  static const hostChats = "$hostConnect/chats";
 
   //signUp-Login user
   static const validateEmail = "$hostConnectUser/validate_email.php";
@@ -29,7 +30,11 @@ class API {
   //order
   static const orderNow = "$hostOrder/order.php";
 
+  //chats
+  static const getChats = "$hostChats/get_chats.php";
+
   //message
   static const sendMessage = "$hostMessage/send_message.php";
   static const getMessages = "$hostMessage/get_messages.php";
+  static const getMessagesByChatId = "$hostMessage/get_messages_by_chat_id.php";
 }

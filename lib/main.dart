@@ -1,3 +1,4 @@
+import 'package:ecf_studi2/admins/chat_list.dart';
 import 'package:ecf_studi2/admins/vendeur_login.dart';
 import 'package:ecf_studi2/users/fragments/page_acceuil.dart';
 import 'package:ecf_studi2/users/fragments/page_contact.dart';
@@ -22,7 +23,7 @@ class MainApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: FutureBuilder(
             builder: (context, dataSnapShot) {
-              return LoginScreen();
+              return ChatList();
             },
             future: Future.value()));
   }
