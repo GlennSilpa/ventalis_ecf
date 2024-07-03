@@ -33,8 +33,11 @@ class _HomePageState extends State<HomePageConnecte> {
           return Scaffold(
               appBar: AppBar(
                 centerTitle: true,
-                title: const Text("Ventalis"),
+                title: const Text("Ventalis", style: TextStyle(color: Colors.white)),
                 backgroundColor: Colors.black,
+                iconTheme: IconThemeData(
+                  color: Colors.white
+                ),
               ),
               drawer: Drawer(
                 child: ListView(
