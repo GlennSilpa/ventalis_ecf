@@ -129,6 +129,10 @@ class _OrderFragmentScreenState extends State<OrderFragmentScreen> {
   getQuantity(String quantity) {
     List<String> quantityList = quantity.split(",");
     int quantityTotal = 0;
+    if(quantityList.length == 1){
+      quantityTotal = int.parse(quantityList[0].substring(1, quantityList[0].length - 1));
+      return quantityTotal;
+    }
     for (int i = 0; i < quantityList.length; i++) {
       if (i == 0) {
         quantityList[i] = quantityList[i].substring(1);
